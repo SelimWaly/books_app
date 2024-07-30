@@ -1,6 +1,6 @@
 # books_app
 
-eBooks Library using Google Books API (For HEMMX Final project)
+eBooks Library using Google Books API
 
 ## Getting Started
 
