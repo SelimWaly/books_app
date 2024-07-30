@@ -1,5 +1,5 @@
 name: books_app
-description: "eBooks Library using Google API (v2) (For HEMMX Final project)"
+description: "eBooks Library using Google Books API (For HEMMX Final project)"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
