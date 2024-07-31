@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:books_app/model/book_model';
 import 'package:books_app/model/book_card_model.dart';
 import 'package:books_app/env/variables.dart';
 
@@ -20,10 +21,20 @@ class BookCubit extends Cubit<BookState> {
 
   List<BookModel> freeBooks = [];
 
-  // List<BookModel> books = [];
 
   getProgrammingBooks() async{
     try {
+      emit(Loading());
+      final response = http.get(Uri.parse('${apiUrl}?q=programming'))
+      if (response.statusCode == 200) {
+        var results = json.decode(response.body);
+        debugPrint('Results: $results')
+        for (var element in results) {
+          programmingBooks.add(BookModel.fromJson(element));
+        }
+      } else {
+        emit(Error());
+      }
       // var data = await FirebaseFirestore.instance.collection('products').get();
       //
       // // data.docs.forEach((element){});
@@ -37,7 +48,7 @@ class BookCubit extends Cubit<BookState> {
       emit(Success());
     }
     catch(e){
-      debugPrint(e.toString());
+      debugPrint('An error has occurred while attempting to fetch items for category "programming".\nError:'${e.toString()}');
     }
   }
 }
