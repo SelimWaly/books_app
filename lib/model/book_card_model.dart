@@ -1,4 +1,4 @@
-class BookModel {
+class BookCardModel {
   String? title;
   String? image;
   String? saleability;
