@@ -1,11 +1,13 @@
 class BookModel {
-  String? id;
-  String? name;
+  String? title;
   String? image;
+  String? saleability;
+  String? price;
 
   BookModel.fromJson(String id,Map<String,dynamic> json){
-    this.id = id;
-    name = json['name'];
-    image = json['image'];
+    title = json['volumeInfo']['title'];
+    image = json['volumeInfo']['imageLinks']['thumbnail'];
+    saleability = json['saleInfo']['saleability'];
+    price = json['saleInfo']['listPrice']['amount'];
   }
 }
