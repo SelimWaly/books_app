@@ -4,7 +4,7 @@ class BookCardModel {
   String? saleability;
   String? price;
 
-  BookCardModel.fromJson(String id,Map<String,dynamic> json){
+  BookCardModel.fromJson(Map<String,dynamic> json){
     title = json['volumeInfo']['title'];
     image = json['volumeInfo']['imageLinks']['thumbnail'];
     saleability = json['saleInfo']['saleability'];
