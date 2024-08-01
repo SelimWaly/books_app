@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:books_app/model/book_model';
+import 'package:books_app/model/book_model.dart';
 import 'package:books_app/model/book_card_model.dart';
 import 'package:books_app/env/variables.dart';
 
