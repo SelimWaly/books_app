@@ -50,7 +50,7 @@ class BookCubit extends Cubit<BookState> {
       emit(Success());
     }
     catch(e){
-      debugPrint('An error has occurred while attempting to fetch items for category "programming".\nError:'${e.toString()}');
+      debugPrint('An error has occurred while attempting to fetch items for category "programming".\nError: ${e.toString()}');
     }
   }
 }
