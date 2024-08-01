@@ -29,7 +29,7 @@ class BookCubit extends Cubit<BookState> {
       final response = http.get(Uri.parse('$apiUrl?q=programming'));
       if (response.statusCode == 200) {
         var results = json.decode(response.body);
-        debugPrint('Results: $results')
+        debugPrint('Results: $results');
         for (var element in results) {
           programmingBooks.add(BookModel.fromJson(element));
         }
