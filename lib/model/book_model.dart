@@ -6,6 +6,8 @@ class BookModel {
   String? author;
   String? saleability;
   String? price;
+  String? buyLink;
+  String? readLink;
 
   BookModel.fromJson(Map<String,dynamic> json){
     title = json['volumeInfo']['title'];
@@ -15,5 +17,7 @@ class BookModel {
     author = json['volumeInfo']['authors'][0]; /// Only show first author
     saleability = json['saleInfo']['saleability'];
     price = json['saleInfo']['listPrice']['amount'];
+    buyLink = json['saleInfo']['buyLink'];
+    readLink = json['accessInfo']['webReaderLink'];
   }
 }
