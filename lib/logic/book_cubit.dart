@@ -24,25 +24,34 @@ class BookCubit extends Cubit<BookState> {
   List<BookModel> freeBooks = [];
 
 
-  getProgrammingBooks() async{
+  getProgrammingBooks() async {
     try {
       emit(Loading());
       final response = await http.get(Uri.parse('$apiUrl?q=programming'));
       if (response.statusCode == 200) {
         var results = json.decode(response.body);
         debugPrint('Results: $results');
-        for (var element in results) {
-          programmingBooks.add(BookModel.fromJson(element));
+        for (var element in results['items']) {
+          var programmingBook = BookModel.fromJson(element);
+          if (programmingBook.saleability == 'NOT_FOR_SALE') {
+            continue;
+          } else if (programmingBook.saleability == 'FOR_SALE') {
+            programmingBooks.add(programmingBook);
+          } else {
+            programmingBook.price = 'FREE';
+            programmingBooks.add(programmingBook);
+          }
         }
+        emit(Success());
       } else {
         emit(Error());
       }
-      emit(Success());
-    }
-    catch(e){
+    } catch (e) {
       debugPrint('An error has occurred while attempting to fetch items for category "programming".\nError: ${e.toString()}');
+      emit(Error());
     }
   }
+
 
   getScienceBooks() async{
     try {
@@ -51,8 +60,16 @@ class BookCubit extends Cubit<BookState> {
       if (response.statusCode == 200) {
         var results = json.decode(response.body);
         debugPrint('Results: $results');
-        for (var element in results) {
-          scienceBooks.add(BookModel.fromJson(element));
+        for (var element in results['items']) {
+          var scienceBook = BookModel.fromJson(element);
+          if (scienceBook.saleability == 'NOT_FOR_SALE') {
+            continue;
+          } else if (scienceBook.saleability == 'FOR_SALE') {
+            scienceBooks.add(scienceBook);
+          } else {
+            scienceBook.price = 'FREE';
+            scienceBooks.add(scienceBook);
+          }
         }
       } else {
         emit(Error());
@@ -71,8 +88,16 @@ class BookCubit extends Cubit<BookState> {
       if (response.statusCode == 200) {
         var results = json.decode(response.body);
         debugPrint('Results: $results');
-        for (var element in results) {
-          businessBooks.add(BookModel.fromJson(element));
+        for (var element in results['items']) {
+          var businessBook = BookModel.fromJson(element);
+          if (businessBook.saleability == 'NOT_FOR_SALE') {
+            continue;
+          } else if (businessBook.saleability == 'FOR_SALE') {
+            businessBooks.add(businessBook);
+          } else {
+            businessBook.price = 'FREE';
+            businessBooks.add(businessBook);
+          }
         }
       } else {
         emit(Error());
@@ -87,12 +112,20 @@ class BookCubit extends Cubit<BookState> {
   getFreeBooks() async{
     try {
       emit(Loading());
-      final response = await http.get(Uri.parse('$apiUrl?q=free'));
+      final response = await http.get(Uri.parse('$apiUrl?q=everything'));
       if (response.statusCode == 200) {
         var results = json.decode(response.body);
         debugPrint('Results: $results');
-        for (var element in results) {
-          freeBooks.add(BookModel.fromJson(element));
+        for (var element in results['items']) {
+          var businessBook = BookModel.fromJson(element);
+          if (businessBook.saleability == 'NOT_FOR_SALE') {
+            continue;
+          } else if (businessBook.saleability == 'FOR_SALE') {
+            debugPrint("Did not display book due to the presence of a price tag.");
+          } else {
+            businessBook.price = 'FREE';
+            businessBooks.add(businessBook);
+          }
         }
       } else {
         emit(Error());
