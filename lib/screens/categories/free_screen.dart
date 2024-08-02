@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:books_app/env/theme.dart';
 import 'package:books_app/logic/book_cubit.dart';
 import 'package:books_app/widgets/book_widget.dart';
-import 'package:books_app/widgets/book_card_widget.dart';
 
 class FreeScreen extends StatelessWidget {
   const FreeScreen({super.key});
@@ -36,7 +35,7 @@ class FreeScreen extends StatelessWidget {
                 },
               ),
               title: const Text(
-                "Programming Books",
+                "Free Books",
                 style: TextStyle(color: Colors.black),
               ),
             ),
