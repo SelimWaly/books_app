@@ -5,7 +5,7 @@ import 'package:books_app/widgets/styled_image_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BookScreen extends StatelessWidget {
-  BookScreen({Key? key, required this.book}) : super(key: key);
+  const BookScreen({super.key, required this.book});
   final BookModel book;
 
   void _launchURL(String url) async {
@@ -22,7 +22,13 @@ class BookScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Book Details'),
+        leading: IconButton(
+          icon: Icon(Icons.close, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text('Book Details'),
         backgroundColor: primaryColor,
       ),
       body: Container(
@@ -36,7 +42,7 @@ class BookScreen extends StatelessWidget {
               color: Colors.black.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -44,13 +50,13 @@ class BookScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Container(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: primaryColor,
                   borderRadius: BorderRadius.circular(7),
@@ -63,7 +69,7 @@ class BookScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Text(
               book.title ?? 'No Title',
               maxLines: 2,
@@ -76,34 +82,34 @@ class BookScreen extends StatelessWidget {
                 decoration: TextDecoration.none,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               book.description ?? 'No Description',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Author: ${book.author ?? 'Unknown'}',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Published Date: ${book.publishedDate ?? 'Unknown'}',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Price: ${book.price ?? 'Free'}',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (book.saleability == 'FOR_SALE' && book.buyLink != null)
               ElevatedButton(
                 onPressed: () => _launchURL(book.buyLink!),
                 child: Text('Buy Book'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  minimumSize: Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
               ),
             if (book.price == 'FREE' && book.readLink != null)
