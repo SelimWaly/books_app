@@ -46,24 +46,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                     width: double.infinity,
                       height: 250,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
                           color: Colors.black
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Container(
                             margin: const EdgeInsets.only(left: 35, right:15),
                             child: const Text("Welcome to Cyberbooks", style: TextStyle(color: secondary,fontSize: 23, fontWeight: FontWeight.w600),),
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Container(
                             margin: const EdgeInsets.only(left: 35, right:15),
                             child: const Text("The Largest eBooks Library", style: TextStyle(color: secondary,fontSize: 15, fontWeight: FontWeight.w500),),
                           ),
-                          SizedBox(height: 35,),
+                          const SizedBox(height: 35,),
                         ],
                       ),
                     ),
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 150,
                       color: Colors.black,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: appBgColor,
                             borderRadius: BorderRadius.only(topRight: Radius.circular(100))
                         ),
@@ -83,30 +83,40 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.only(left: 15, right: 15, top: 10),
-                  child: Text("Latest Books", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+                  child: const Text("Programming Books", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
                 ),
-          SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   child: getProgrammingBanner(),
                 ),
-                SizedBox(height: 25,),
+                const SizedBox(height: 15,),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                    padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+                    child: const Text("Science Books", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
+                ),
+                const SizedBox(height: 25,),
+                Container(
+                  margin: const EdgeInsets.only(left: 15),
                   child: getScienceBanner(),
                 ),
-                SizedBox(height: 25,),
+                const SizedBox(height: 15,),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                    padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
+                    child: const Text("Business Books", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
+                ),
+                const SizedBox(height: 25,),
+                Container(
+                  margin: const EdgeInsets.only(left: 15),
                   child: getBusinessBanner(),
                 ),
-                SizedBox(height: 25,),
+                const SizedBox(height: 25,),
                   ],
                 ),
               ],
@@ -121,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
           var cubit = BookCubit.get(context);
 
           return SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: const EdgeInsets.only(bottom: 5),
             scrollDirection: Axis.horizontal,
             child: ListView.separated(
               scrollDirection: Axis.vertical,
@@ -146,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
           var cubit = BookCubit.get(context);
 
           return SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: const EdgeInsets.only(bottom: 5),
             scrollDirection: Axis.horizontal,
             child: ListView.separated(
               scrollDirection: Axis.vertical,
@@ -171,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
           var cubit = BookCubit.get(context);
 
           return SingleChildScrollView(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: const EdgeInsets.only(bottom: 5),
             scrollDirection: Axis.horizontal,
             child: ListView.separated(
               scrollDirection: Axis.vertical,
