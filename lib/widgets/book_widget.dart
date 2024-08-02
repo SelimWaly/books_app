@@ -17,14 +17,14 @@ class BookItem extends StatelessWidget {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.only(top: 15),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(top: 15),
       child: Row(
         children: [
           Stack(
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 50, right: 40),
+                padding: const EdgeInsets.only(bottom: 50, right: 40),
                 width: _width,
                 height: _height,
                 decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class BookItem extends StatelessWidget {
                       color: shadowColor.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
-                      offset: Offset(1, 1),
+                      offset: const Offset(1, 1),
                     ),
                   ],
                 ),
@@ -44,14 +44,14 @@ class BookItem extends StatelessWidget {
                   height: _height / 2,
                   decoration: BoxDecoration(
                     color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15)),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(15)),
                   ),
                 ),
               ),
               Container(
                 width: _width,
                 height: _height,
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: StyledImage(
                   book.image ?? '',
                   isSVG: false,
@@ -60,15 +60,15 @@ class BookItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 18),
+          const SizedBox(width: 18),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 book.title ?? 'Unknown Title',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               RichText(
                 text: TextSpan(
                   children: [
@@ -78,16 +78,16 @@ class BookItem extends StatelessWidget {
                           : book.saleability == 'FOR_SALE'
                           ? (book.price ?? 'N/A')
                           : '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: primary,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    TextSpan(text: "   "),
+                    const TextSpan(text: "   "),
                     if (book.saleability == 'FOR_SALE')
-                      TextSpan(
-                        text: 'N/A', // Placeholder for oriPrice
+                      const TextSpan(
+                        text: 'N/A',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 16,
