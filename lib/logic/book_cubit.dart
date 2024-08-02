@@ -37,16 +37,6 @@ class BookCubit extends Cubit<BookState> {
       } else {
         emit(Error());
       }
-      // var data = await FirebaseFirestore.instance.collection('products').get();
-      //
-      // // data.docs.forEach((element){});
-      //
-      // for (var element in data.docs) {
-      //   products.add(ProductsModel.fromJson(element.id, element.data()));
-      //   // print('====${element.data()}====');
-      //
-      // }
-
       emit(Success());
     }
     catch(e){
