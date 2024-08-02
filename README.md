@@ -1,16 +1,26 @@
-# books_app
+# Cyberbooks
 
-eBooks Library using Google Books API
+### eBooks Library Flutter Mobile Application
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Introduction
 
-A few resources to get you started if this is your first Flutter project:
+This application is programmed using Dart and is a mobile application for an eBooks library.
+The application is both front and back end and display eBooks in different categories and guides the 
+user to buy or read the book.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Resources
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The eBooks library is powered by [Google's eBooks API](https://developers.google.com/books/docs/overview).
+
+The API is available at the following URL:
+```
+https://www.googleapis.com/books/v1/volumes
+```
+
+## Testing
+
+The program's testing only tests the status of the API whether it is connected and functioning (test passes) or disconnected (test fails).
+
+---
