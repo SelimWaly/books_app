@@ -1,3 +1,4 @@
+import 'package:books_app/screens/book_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:books_app/env/theme.dart';
@@ -52,7 +53,17 @@ class ProgrammingScreen extends StatelessWidget {
                         itemCount: cubit.programmingBooks.length,
                         itemBuilder: (context, index){
                           var programmingBook = cubit.programmingBooks[index];
-                          return BookItem(book: programmingBook);
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BookScreen(book: programmingBook),
+                                ),
+                              );
+                            },
+                            child: BookItem(book: programmingBook)
+                          );
                         },
                         separatorBuilder: (context, index) {
                           return const SizedBox(width: 10);
