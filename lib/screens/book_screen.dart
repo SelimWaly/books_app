@@ -18,7 +18,7 @@ class BookScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor; // Access primary color from the theme
+    final primaryColor = Theme.of(context).primaryColor;
 
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +36,7 @@ class BookScreen extends StatelessWidget {
               color: Colors.black.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(1, 1), // changes position of shadow
+              offset: Offset(1, 1),
             ),
           ],
         ),
@@ -103,16 +103,16 @@ class BookScreen extends StatelessWidget {
                 child: Text('Buy Book'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  minimumSize: Size(double.infinity, 50), // Full width
+                  minimumSize: Size(double.infinity, 50),
                 ),
               ),
-            if (book.saleability == 'FREE' && book.readLink != null)
+            if (book.price == 'FREE' && book.readLink != null)
               ElevatedButton(
                 onPressed: () => _launchURL(book.readLink!),
                 child: Text('Read Book'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  minimumSize: Size(double.infinity, 50), // Full width
+                  minimumSize: Size(double.infinity, 50),
                 ),
               ),
           ],
