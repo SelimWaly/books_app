@@ -5,7 +5,7 @@ import 'package:books_app/widgets/styled_image_widget.dart';
 import 'package:books_app/model/book_model.dart';
 
 class BookCover extends StatelessWidget {
-  BookCover({Key? key, required this.book}) : super(key: key);
+  const BookCover({super.key, required this.book});
   final BookModel book;
 
   @override
@@ -14,13 +14,13 @@ class BookCover extends StatelessWidget {
 
 
     return Container(
-      margin: EdgeInsets.only(right: 15),
+      margin: const EdgeInsets.only(right: 15),
       child: Column(
         children: [
           Stack(
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 50, right: 40),
+                padding: const EdgeInsets.only(bottom: 50, right: 40),
                 width: width,
                 height: height,
                 decoration: BoxDecoration(
@@ -31,7 +31,7 @@ class BookCover extends StatelessWidget {
                       color: shadowColor.withOpacity(0.1),
                       spreadRadius: 1,
                       blurRadius: 1,
-                      offset: Offset(1, 1),
+                      offset: const Offset(1, 1),
                     ),
                   ],
                 ),
@@ -40,14 +40,14 @@ class BookCover extends StatelessWidget {
                   height: height / 2,
                   decoration: BoxDecoration(
                     color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15)),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(15)),
                   ),
                 ),
               ),
               Container(
                 width: width,
                 height: height,
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: StyledImage(
                   book.image ?? '',
                   isSVG: false,
@@ -56,10 +56,10 @@ class BookCover extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             book.price ?? '',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
               color: Colors.black,
