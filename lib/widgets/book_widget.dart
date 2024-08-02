@@ -10,7 +10,7 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = 80, _height = 110;
+    double width = 80, height = 110;
 
     if (book.saleability == 'NOT_FOR_SALE') {
       return SizedBox.shrink();
@@ -25,8 +25,8 @@ class BookItem extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(bottom: 50, right: 40),
-                width: _width,
-                height: _height,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                   color: primary,
                   borderRadius: BorderRadius.circular(15),
@@ -40,8 +40,8 @@ class BookItem extends StatelessWidget {
                   ],
                 ),
                 child: Container(
-                  width: _width / 2,
-                  height: _height / 2,
+                  width: width / 2,
+                  height: height / 2,
                   decoration: BoxDecoration(
                     color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
                     borderRadius: const BorderRadius.only(topLeft: Radius.circular(15)),
@@ -49,8 +49,8 @@ class BookItem extends StatelessWidget {
                 ),
               ),
               Container(
-                width: _width,
-                height: _height,
+                width: width,
+                height: height,
                 padding: const EdgeInsets.all(8),
                 child: StyledImage(
                   book.image ?? '',
