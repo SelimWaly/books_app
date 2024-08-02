@@ -43,4 +43,64 @@ class BookCubit extends Cubit<BookState> {
       debugPrint('An error has occurred while attempting to fetch items for category "programming".\nError: ${e.toString()}');
     }
   }
+
+  getScienceBooks() async{
+    try {
+      emit(Loading());
+      final response = await http.get(Uri.parse('$apiUrl?q=science'));
+      if (response.statusCode == 200) {
+        var results = json.decode(response.body);
+        debugPrint('Results: $results');
+        for (var element in results) {
+          scienceBooks.add(BookModel.fromJson(element));
+        }
+      } else {
+        emit(Error());
+      }
+      emit(Success());
+    }
+    catch(e){
+      debugPrint('An error has occurred while attempting to fetch items for category "science".\nError: ${e.toString()}');
+    }
+  }
+
+  getBusinessBooks() async{
+    try {
+      emit(Loading());
+      final response = await http.get(Uri.parse('$apiUrl?q=business'));
+      if (response.statusCode == 200) {
+        var results = json.decode(response.body);
+        debugPrint('Results: $results');
+        for (var element in results) {
+          businessBooks.add(BookModel.fromJson(element));
+        }
+      } else {
+        emit(Error());
+      }
+      emit(Success());
+    }
+    catch(e){
+      debugPrint('An error has occurred while attempting to fetch items for category "business".\nError: ${e.toString()}');
+    }
+  }
+
+  getFreeBooks() async{
+    try {
+      emit(Loading());
+      final response = await http.get(Uri.parse('$apiUrl?q=free'));
+      if (response.statusCode == 200) {
+        var results = json.decode(response.body);
+        debugPrint('Results: $results');
+        for (var element in results) {
+          freeBooks.add(BookModel.fromJson(element));
+        }
+      } else {
+        emit(Error());
+      }
+      emit(Success());
+    }
+    catch(e){
+      debugPrint('An error has occurred while attempting to fetch items free books.\nError: ${e.toString()}');
+    }
+  }
 }
