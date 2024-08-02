@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:books_app/env/theme.dart';
 import 'package:books_app/logic/book_cubit.dart';
 import 'package:books_app/widgets/book_widget.dart';
-import 'package:books_app/widgets/book_card_widget.dart';
 
 class ScienceScreen extends StatelessWidget {
   const ScienceScreen({super.key});
