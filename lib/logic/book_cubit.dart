@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:books_app/model/book_model.dart';
-import 'package:books_app/model/book_card_model.dart';
 import 'package:books_app/env/variables.dart';
 
 part 'book_state.dart';
