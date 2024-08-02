@@ -52,7 +52,6 @@ class BookCubit extends Cubit<BookState> {
     }
   }
 
-
   getScienceBooks() async{
     try {
       emit(Loading());
