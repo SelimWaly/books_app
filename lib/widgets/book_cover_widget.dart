@@ -10,7 +10,7 @@ class BookCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = 75, _height = 100;
+    double width = 75, height = 100;
 
 
     return Container(
@@ -21,8 +21,8 @@ class BookCover extends StatelessWidget {
             children: [
               Container(
                 padding: EdgeInsets.only(bottom: 50, right: 40),
-                width: _width,
-                height: _height,
+                width: width,
+                height: height,
                 decoration: BoxDecoration(
                   color: primary,
                   borderRadius: BorderRadius.circular(15),
@@ -36,8 +36,8 @@ class BookCover extends StatelessWidget {
                   ],
                 ),
                 child: Container(
-                  width: _width / 2,
-                  height: _height / 2,
+                  width: width / 2,
+                  height: height / 2,
                   decoration: BoxDecoration(
                     color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(15)),
@@ -45,8 +45,8 @@ class BookCover extends StatelessWidget {
                 ),
               ),
               Container(
-                width: _width,
-                height: _height,
+                width: width,
+                height: height,
                 padding: EdgeInsets.all(8),
                 child: StyledImage(
                   book.image ?? '',
