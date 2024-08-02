@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Container(
                                   width: double.infinity,
-                                  height: 250,
+                                  height: 200, ///250
                                   decoration: const BoxDecoration(
                                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100)),
                                       color: Colors.black
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 Container(
-                                  height: 150,
+                                  height: 10,
                                   color: Colors.black,
                                   child: Container(
                                     decoration: const BoxDecoration(
@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 15,),
+                    const SizedBox(height: 15,), ///35
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -244,9 +244,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 15,),
-                        Container(
-                          margin: const EdgeInsets.only(left: 15),
-                          child: getProgrammingBanner(),
+                        BlocProvider(
+                          create: (context) => BookCubit()..getProgrammingBooks,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 15),
+                            child: getProgrammingBanner(),
+                          ),
                         ),
                         const SizedBox(height: 15,),
                         InkWell(
@@ -271,9 +274,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 25,),
-                        Container(
-                          margin: const EdgeInsets.only(left: 15),
-                          child: getScienceBanner(),
+                        BlocProvider(
+                          create: (context) => BookCubit()..getScienceBooks,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 15),
+                            child: getScienceBanner(),
+                          ),
                         ),
                         const SizedBox(height: 15,),
                         InkWell(
@@ -298,9 +304,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 25,),
-                        Container(
-                          margin: const EdgeInsets.only(left: 15),
-                          child: getBusinessBanner(),
+                        BlocProvider(
+                          create: (context) => BookCubit()..getBusinessBooks(),
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 15),
+                            child: getBusinessBanner(),
+                          ),
                         ),
                         const SizedBox(height: 25,),
                       ],
