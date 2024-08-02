@@ -11,7 +11,7 @@ class ProgrammingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BookCubit,BookState>(
+    return BlocBuilder<BookCubit, BookState>(
       builder: (context, state) {
         var cubit = BookCubit.get(context);
 
@@ -26,6 +26,20 @@ class ProgrammingScreen extends StatelessWidget {
           length: 2,
           child: Scaffold(
             backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: const Text(
+                "Programming Books",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
             body: Column(
               children: [
                 Container(
@@ -51,7 +65,7 @@ class ProgrammingScreen extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         padding: const EdgeInsets.only(left: 15, right: 15),
                         itemCount: cubit.programmingBooks.length,
-                        itemBuilder: (context, index){
+                        itemBuilder: (context, index) {
                           var programmingBook = cubit.programmingBooks[index];
                           return InkWell(
                             onTap: () {
@@ -62,13 +76,12 @@ class ProgrammingScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: BookItem(book: programmingBook)
+                            child: BookItem(book: programmingBook),
                           );
                         },
                         separatorBuilder: (context, index) {
                           return const SizedBox(width: 10);
                         },
-
                       ),
                     ],
                   ),
@@ -77,7 +90,7 @@ class ProgrammingScreen extends StatelessWidget {
             ),
           ),
         );
-      }
+      },
     );
   }
 }
