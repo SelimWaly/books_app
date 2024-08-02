@@ -16,11 +16,6 @@ class BookCubit extends Cubit<BookState> {
   List<BookModel> scienceBooks = [];
   List<BookModel> businessBooks = [];
 
-  List<BookModel> programmingBannerBooks = [];
-  List<BookModel> scienceBannerBooks = [];
-  List<BookModel> businessBannerBooks = [];
-
-
   List<BookModel> freeBooks = [];
 
 
