@@ -27,7 +27,7 @@ class BookCubit extends Cubit<BookState> {
   getProgrammingBooks() async{
     try {
       emit(Loading());
-      final response = http.get(Uri.parse('$apiUrl?q=programming'));
+      final response = await http.get(Uri.parse('$apiUrl?q=programming'));
       if (response.statusCode == 200) {
         var results = json.decode(response.body);
         debugPrint('Results: $results');
