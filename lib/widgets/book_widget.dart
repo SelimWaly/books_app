@@ -61,44 +61,42 @@ class BookItem extends StatelessWidget {
             ],
           ),
           const SizedBox(width: 18),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                book.title ?? 'Unknown Title',
-                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 12),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: book.saleability == 'FREE'
-                          ? 'FREE'
-                          : book.saleability == 'FOR_SALE'
-                          ? (book.price ?? 'N/A')
-                          : '',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: primary,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const TextSpan(text: "   "),
-                    if (book.saleability == 'FOR_SALE')
-                      const TextSpan(
-                        text: 'N/A',
-                        style: TextStyle(
-                          color: Colors.grey,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  book.title ?? 'Unknown Title',
+                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 12),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '${book.price}',
+                        style: const TextStyle(
                           fontSize: 16,
-                          decoration: TextDecoration.lineThrough,
+                          color: primary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                  ],
+                      const TextSpan(text: "   "),
+                      if (book.saleability == 'FOR_SALE')
+                        const TextSpan(
+                          text: 'N/A',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                            decoration: TextDecoration.lineThrough,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
