@@ -67,30 +67,27 @@ class ProgrammingScreen extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            child: BlocProvider(
-                              create: (context) => BookCubit()..getProgrammingBooks,
-                              child: ListView.separated(
-                                scrollDirection: Axis.vertical,
-                                padding: const EdgeInsets.only(left: 15, right: 15),
-                                itemCount: cubit.programmingBooks.length,
-                                itemBuilder: (context, index) {
-                                  var programmingBook = cubit.programmingBooks[index];
-                                  return InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => BookScreen(book: programmingBook),
-                                        ),
-                                      );
-                                    },
-                                    child: BookItem(book: programmingBook),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(width: 10);
-                                },
-                              ),
+                            child: ListView.separated(
+                              scrollDirection: Axis.vertical,
+                              padding: const EdgeInsets.only(left: 15, right: 15),
+                              itemCount: cubit.programmingBooks.length,
+                              itemBuilder: (context, index) {
+                                var programmingBook = cubit.programmingBooks[index];
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BookScreen(book: programmingBook),
+                                      ),
+                                    );
+                                  },
+                                  child: BookItem(book: programmingBook),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(width: 10);
+                              },
                             ),
                           ),
                         ],
@@ -99,7 +96,49 @@ class ProgrammingScreen extends StatelessWidget {
                   }
                 }
                 else {
-                  return Center(child: Text("An error has occured.", style: TextStyle(fontSize: 35),));
+                  return Scaffold(
+                    backgroundColor: Colors.transparent,
+                    appBar: AppBar(
+                      backgroundColor: Colors.white,
+                      elevation: 0,
+                      leading: IconButton(
+                        icon: const Icon(Icons.arrow_back, color: Colors.black),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          );
+                        },
+                      ),
+                      title: const Text(
+                        "Programming Books",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    body: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                              left: 15, right: 15, top: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey.shade200,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: shadowColor.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: const Offset(1, 1)
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(child: Text("An error has occured.", style: TextStyle(fontSize: 35),)),
+                        ),
+                      ],
+                    ),
+                  );
                 }
 
               },
