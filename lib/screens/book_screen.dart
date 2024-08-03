@@ -8,11 +8,10 @@ class BookScreen extends StatelessWidget {
   const BookScreen({super.key, required this.book});
   final BookModel book;
 
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> _launchUrl(String url) async {
+    var link = Uri.parse(url);
+    if (!await launchUrl(link)) {
+      throw Exception('Could not launch $link');
     }
   }
 
@@ -31,97 +30,99 @@ class BookScreen extends StatelessWidget {
         title: const Text('Book Details'),
         backgroundColor: primaryColor,
       ),
-      body: Container(
-        margin: EdgeInsets.all(15),
-        padding: EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: const Offset(1, 1),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
-                borderRadius: BorderRadius.circular(12),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(15),
+          padding: EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(1, 1),
               ),
-              child: Container(
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
+                  color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  child: StyledImage(
+                    book.image ?? '',
+                    width: 80,
+                    height: 100,
+                    isSVG: false,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                book.title ?? 'No Title',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
                   color: primaryColor,
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                child: StyledImage(
-                  book.image ?? '',
-                  width: 80,
-                  height: 100,
-                  isSVG: false,
+                  fontWeight: FontWeight.w600,
+                  decoration: TextDecoration.none,
                 ),
               ),
-            ),
-            const SizedBox(height: 15),
-            Text(
-              book.title ?? 'No Title',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: primaryColor,
-                fontWeight: FontWeight.w600,
-                decoration: TextDecoration.none,
+              const SizedBox(height: 10),
+              Text(
+                book.description ?? 'No Description',
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
               ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              book.description ?? 'No Description',
-              style: const TextStyle(fontSize: 14, color: Colors.black54),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Author: ${book.author ?? 'Unknown'}',
-              style: const TextStyle(fontSize: 14, color: Colors.black54),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Published Date: ${book.publishedDate ?? 'Unknown'}',
-              style: const TextStyle(fontSize: 14, color: Colors.black54),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Price: ${book.price ?? 'Free'}',
-              style: const TextStyle(fontSize: 14, color: Colors.black54),
-            ),
-            const SizedBox(height: 20),
-            if (book.saleability == 'FOR_SALE' && book.buyLink != null)
-              ElevatedButton(
-                onPressed: () => _launchURL(book.buyLink!),
-                child: Text('Buy Book'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  minimumSize: const Size(double.infinity, 50),
+              const SizedBox(height: 10),
+              Text(
+                'Author: ${book.author ?? 'Unknown'}',
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Published Date: ${book.publishedDate ?? 'Unknown'}',
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Price: ${book.price ?? 'Free'}',
+                style: const TextStyle(fontSize: 14, color: Colors.black54),
+              ),
+              const SizedBox(height: 20),
+              if (book.saleability == 'FOR_SALE' && book.buyLink != null)
+                ElevatedButton(
+                  onPressed: () => _launchUrl(book.buyLink!),
+                  child: Text('Buy Book'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    minimumSize: const Size(double.infinity, 50),
+                  ),
                 ),
-              ),
-            if (book.price == 'FREE' && book.readLink != null)
-              ElevatedButton(
-                onPressed: () => _launchURL(book.readLink!),
-                child: Text('Read Book'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  minimumSize: Size(double.infinity, 50),
+              if (book.price == 'FREE' && book.readLink != null)
+                ElevatedButton(
+                  onPressed: () => _launchUrl(book.readLink!),
+                  child: Text('Read Book'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    minimumSize: Size(double.infinity, 50),
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
