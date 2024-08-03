@@ -56,7 +56,7 @@ class BookCard extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                   children: [
-                    TextSpan(text: book.price ?? '', style: const TextStyle(fontSize: 16, color: primary ,fontWeight: FontWeight.w500))
+                    TextSpan(text: '${book.price}', style: const TextStyle(fontSize: 16, color: primary ,fontWeight: FontWeight.w500))
                   ]
               )
           )
