@@ -58,7 +58,7 @@ class BookCover extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            book.price ?? '',
+            '${book.price}',
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
