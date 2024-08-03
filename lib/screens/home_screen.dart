@@ -7,10 +7,6 @@ import 'package:books_app/screens/categories/business_screen.dart';
 import 'package:books_app/screens/categories/programming_screen.dart';
 import 'package:books_app/screens/categories/science_screen.dart';
 import 'package:books_app/screens/categories/free_screen.dart';
-import 'package:http/http.dart' as http;
-import 'package:books_app/env/variables.dart';
-import 'dart:convert';
-import 'package:books_app/model/book_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,54 +16,40 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int activeTab = 0;
+  int myIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-    //   bottomNavigationBar: Container(
-    //   height: 65,
-    //   width: double.infinity,
-    //   decoration: const BoxDecoration(
-    //     borderRadius: BorderRadius.only(
-    //       topLeft: Radius.circular(100),
-    //     ),
-    //     color: bottomBarColor,
-    //   ),
-    //   child: Padding(
-    //       padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
-    //       child: Row(
-    //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //           children: [
-    //             GestureDetector(
-    //               onTap: () {
-    //                 setState(() {
-    //                   activeTab = 0;
-    //                 });
-    //               },
-    //               child: BottomBarItem(Icons.book_rounded, "", isActive: activeTab == 0, activeColor: secondary),
-    //             ),
-    //             GestureDetector(
-    //               onTap: () {
-    //                 setState(() {
-    //                   activeTab = 1;
-    //                 });
-    //               },
-    //               child: BottomBarItem(Icons.money_off_rounded, "", isActive: activeTab == 1, activeColor: secondary),
-    //             ),
-    //             GestureDetector(
-    //               onTap: () {
-    //                 setState(() {
-    //                   activeTab = 2;
-    //                 });
-    //               },
-    //               child: BottomBarItem(Icons.info_rounded, "", isActive: activeTab == 2, activeColor: secondary),
-    //             )
-    //           ]
-    //       )
-    //   ),
-    // ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          setState(() {
+            myIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book_outlined, color: Colors.white),
+            label: 'Categories',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.money_off_outlined, color: Colors.white),
+            label: 'Free',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info_outline, color: Colors.white),
+            label: 'Credits',
+            backgroundColor: Colors.black,
+          ),
+        ],
+        selectedItemColor: Colors.white, // Set selected item color to white
+        unselectedItemColor: Colors.white, // Set unselected item color to white
+        backgroundColor: Colors.black, // Set navigation bar background color to black
+      ),
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
@@ -221,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
               )
           ),
           child: IndexedStack(
-            index: activeTab,
+            index: myIndex,
             children: <Widget>[
               SingleChildScrollView(
                 child: Column(
