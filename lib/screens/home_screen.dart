@@ -7,7 +7,10 @@ import 'package:books_app/screens/categories/business_screen.dart';
 import 'package:books_app/screens/categories/programming_screen.dart';
 import 'package:books_app/screens/categories/science_screen.dart';
 import 'package:books_app/screens/categories/free_screen.dart';
-import 'package:books_app/widgets/bottom_bar_item_widget.dart';
+import 'package:http/http.dart' as http;
+import 'package:books_app/env/variables.dart';
+import 'dart:convert';
+import 'package:books_app/model/book_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,52 +21,53 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int activeTab = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      bottomNavigationBar: Container(
-      height: 65,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(100),
-        ),
-        color: bottomBarColor,
-      ),
-      child: Padding(
-          padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      activeTab = 0;
-                    });
-                  },
-                  child: BottomBarItem(Icons.book_rounded, "", isActive: activeTab == 0, activeColor: secondary),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      activeTab = 1;
-                    });
-                  },
-                  child: BottomBarItem(Icons.money_off_rounded, "", isActive: activeTab == 1, activeColor: secondary),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      activeTab = 2;
-                    });
-                  },
-                  child: BottomBarItem(Icons.info_rounded, "", isActive: activeTab == 2, activeColor: secondary),
-                )
-              ]
-          )
-      ),
-    ),
+    //   bottomNavigationBar: Container(
+    //   height: 65,
+    //   width: double.infinity,
+    //   decoration: const BoxDecoration(
+    //     borderRadius: BorderRadius.only(
+    //       topLeft: Radius.circular(100),
+    //     ),
+    //     color: bottomBarColor,
+    //   ),
+    //   child: Padding(
+    //       padding: const EdgeInsets.only(left: 25, right: 25, top: 10),
+    //       child: Row(
+    //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //           children: [
+    //             GestureDetector(
+    //               onTap: () {
+    //                 setState(() {
+    //                   activeTab = 0;
+    //                 });
+    //               },
+    //               child: BottomBarItem(Icons.book_rounded, "", isActive: activeTab == 0, activeColor: secondary),
+    //             ),
+    //             GestureDetector(
+    //               onTap: () {
+    //                 setState(() {
+    //                   activeTab = 1;
+    //                 });
+    //               },
+    //               child: BottomBarItem(Icons.money_off_rounded, "", isActive: activeTab == 1, activeColor: secondary),
+    //             ),
+    //             GestureDetector(
+    //               onTap: () {
+    //                 setState(() {
+    //                   activeTab = 2;
+    //                 });
+    //               },
+    //               child: BottomBarItem(Icons.info_rounded, "", isActive: activeTab == 2, activeColor: secondary),
+    //             )
+    //           ]
+    //       )
+    //   ),
+    // ),
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
@@ -78,83 +82,134 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   getProgrammingBanner() {
-    return BlocBuilder<BookCubit, BookState>(
-      builder: (context, state) {
-        var cubit = BookCubit.get(context);
-
-        return SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 5),
-          scrollDirection: Axis.horizontal,
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              var programmingBook = cubit.programmingBooks[index];
-              return BookCover(book: programmingBook);
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 10);
-            },
-          ),
-        );
-      },
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: BlocBuilder<BookCubit, BookState>(
+            builder: (context, state) {
+              var cubit = BookCubit.get(context);
+      
+              if (state is Loading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is Success) {
+                if (cubit.programmingBooks.isEmpty) {
+                  return const Center(
+                      child: Text("No programming books were found."));
+                }
+      
+                return SizedBox(
+                  height: 130,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      var programmingBook = cubit.programmingBooks[index];
+                      return BookCover(book: programmingBook);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 10);
+                    },
+                  ),
+                );
+              }
+              else {
+                return const Center(child: Text("An error occurred."));
+              }
+            }
+        ),
+      ),
     );
   }
 
   getScienceBanner() {
-    return BlocBuilder<BookCubit, BookState>(
-      builder: (context, state) {
-        var cubit = BookCubit.get(context);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: BlocBuilder<BookCubit, BookState>(
+          builder: (context, state) {
+            var cubit = BookCubit.get(context);
 
-        return SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 5),
-          scrollDirection: Axis.horizontal,
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              var scienceBook = cubit.scienceBooks[index];
-              return BookCover(book: scienceBook);
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 10);
-            },
-          ),
-        );
-      },
+            if (state is Loading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is Success) {
+              if (cubit.scienceBooks.isEmpty) {
+                return const Center(
+                    child: Text("No science books were found."));
+              }
+              else {
+                return SizedBox(
+                  height: 130,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      var scienceBook = cubit.scienceBooks[index];
+                      return BookCover(book: scienceBook);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 10);
+                    },
+                  ),
+                );
+              }
+            }
+            else {
+              return const Center(child: Text("An error occurred."));
+            }
+          },
+        ),
+      ),
     );
   }
 
   getBusinessBanner() {
-    return BlocBuilder<BookCubit, BookState>(
-      builder: (context, state) {
-        var cubit = BookCubit.get(context);
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: BlocBuilder<BookCubit, BookState>(
+          builder: (context, state) {
+            var cubit = BookCubit.get(context);
+      
+            if (state is Loading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is Success) {
+              if (cubit.businessBooks.isEmpty) {
+                return const Center(
+                    child: Text("No business books were found."));
+              }
+              else{
+                return SizedBox(
+                  height: 130,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      var businessBook = cubit.businessBooks[index];
+                      return BookCover(book: businessBook);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(width: 10);
+                    },
+                  ),
+                );
+              }
+      
 
-        return SingleChildScrollView(
-          padding: const EdgeInsets.only(bottom: 5),
-          scrollDirection: Axis.horizontal,
-          child: ListView.separated(
-            scrollDirection: Axis.vertical,
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              var businessBook = cubit.businessBooks[index];
-              return BookCover(book: businessBook);
-            },
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 10);
-            },
-          ),
-        );
-      },
+            }
+            else {
+              return const Center(child: Text("An error occurred."));
+            }
+          },
+        ),
+      ),
     );
   }
 
   Widget getPage(){
-    return
-      Container(
+    return Container(
         decoration: BoxDecoration(
             color: bottomBarColor
         ),
@@ -245,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 15,),
                         BlocProvider(
-                          create: (context) => BookCubit()..getProgrammingBooks,
+                          create: (context) => BookCubit()..getProgrammingBooks(),
                           child: Container(
                             margin: const EdgeInsets.only(left: 15),
                             child: getProgrammingBanner(),
@@ -275,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 25,),
                         BlocProvider(
-                          create: (context) => BookCubit()..getScienceBooks,
+                          create: (context) => BookCubit()..getScienceBooks(),
                           child: Container(
                             margin: const EdgeInsets.only(left: 15),
                             child: getScienceBanner(),
