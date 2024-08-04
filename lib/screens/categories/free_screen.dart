@@ -44,7 +44,7 @@ class FreeScreen extends StatelessWidget {
                           },
                         ),
                         title: const Text(
-                          "free Books",
+                          "Free Books",
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
