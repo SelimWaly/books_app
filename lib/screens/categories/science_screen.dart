@@ -44,7 +44,7 @@ class ScienceScreen extends StatelessWidget {
                           },
                         ),
                         title: const Text(
-                          "science Books",
+                          "Science Books",
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
