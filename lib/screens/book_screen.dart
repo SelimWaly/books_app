@@ -49,23 +49,25 @@ class BookScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+              Center(
                 child: Container(
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(7),
+                    color: Color(Random().nextInt(0xffffffff)).withAlpha(0xff),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: StyledImage(
-                    book.image ?? '',
-                    width: 80,
-                    height: 100,
-                    isSVG: false,
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: StyledImage(
+                      book.image ?? '',
+                      width: 80,
+                      height: 100,
+                      isSVG: false,
+                    ),
                   ),
                 ),
               ),
@@ -86,6 +88,8 @@ class BookScreen extends StatelessWidget {
               Text(
                 book.description ?? 'No Description',
                 style: const TextStyle(fontSize: 14, color: Colors.black54),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 15,
               ),
               const SizedBox(height: 10),
               Text(
