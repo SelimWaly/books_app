@@ -108,7 +108,7 @@ class BookCubit extends Cubit<BookState> {
         var results = json.decode(response.body);
         debugPrint('Results: $results');
         for (var element in results['items']) {
-          businessBooks.add(BookModel.fromJson(element));
+          freeBooks.add(BookModel.fromJson(element));
         }
         emit(Success());
       } else {
