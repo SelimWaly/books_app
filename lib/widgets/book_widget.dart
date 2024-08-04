@@ -82,13 +82,11 @@ class BookItem extends StatelessWidget {
                         ),
                       ),
                       const TextSpan(text: "   "),
-                      if (book.saleability == 'FOR_SALE')
-                        const TextSpan(
-                          text: 'N/A',
-                          style: TextStyle(
+                         TextSpan(
+                          text: 'By ${book.author}',
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
-                            decoration: TextDecoration.lineThrough,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
